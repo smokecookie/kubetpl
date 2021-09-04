@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-app
+spec:
+  containers:
+    - name: nginx
+      image: nginx:1.18.0
+      # 버전 입력 콜론(:)
+      ports:
+        - name: nginx-port
+          containerPort: 80
+          protocol: TCP

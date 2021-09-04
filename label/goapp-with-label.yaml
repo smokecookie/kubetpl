@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: goapp-pod
+  labels:
+    env: prod
+    # 운영계 라벨 설정
+spec:
+  containers:
+  - image: smokecookie/goapp
+    name: goapp-container
+    ports:
+    - containerPort: 8080
+      protocol: TCP

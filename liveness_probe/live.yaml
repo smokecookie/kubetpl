@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: liveness-http
+spec:
+  containers:
+  - name: liveness
+    image: k8s.gcr.io/liveness
+    # go로 만들어졌으며 10초 동안 정상작동 후 에러 발생 (테스트를 위해)
+    args:
+    - /server
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 8080
+        httpHeaders:
+        - name: Custom-Header
+          value: AWESOME
+      initialDelaySeconds: 3
+      periodSeconds: 3

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: goapp-pod
+spec:
+  nodeSelector:
+    memsize: "high"
+  containers:
+  - image: smokecookie/goapp
+    name: goapp-container
