@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-goapp-ingress
+spec:
+  rules:
+  - host: nginx.acorn.com
+    http: 
+      paths: 
+      - path: /
+        backend: 
+          serviceName: nginx-lb
+          servicePort: 80
+  - host: goapp.acorn.com
+    http: 
+      paths:
+      - path: /
+        backend: 
+          serviceName: goapp-lb
+          servicePort: 80

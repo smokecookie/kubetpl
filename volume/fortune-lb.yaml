@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fortune-lb
+spec:
+  selector:
+    app: fortune
+  ports:
+    - port: 80
+      targetPort: 80
+  type: LoadBalancer
+  # externalIPs:
+  # - 192.168.56.108
+  # 로컬환경에서 구축할 때 필요함 gcp 환경에서 필요 없음

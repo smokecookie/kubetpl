@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitvolume-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - image: nginx:alpine
+        name: web-server
+        volumeMounts:
+        - name: html
+          mountPath: /usr/share/nginx/html
+          # 아래 정의한 볼륨을 마운트한 경로
+          readOnly: true
+        ports:
+          - containerPort: 80
+            protocol: TCP
+      volumes:
+      # volumn정의
+      - name: html
+        gitRepo:
+        # git에 있는 소스를 마운트 할 수 있는 타입
+          repository: https://github.com/dangtong76/k8s-web.git
+          # 저장소 경로 (git)
+          revision: master
+          # branch를 의미
+          directory: .
+          # branch안의 특정 디렉토리 지정 .은 전체를 의미
